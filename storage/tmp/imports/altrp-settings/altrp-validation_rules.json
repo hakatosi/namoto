@@ -1,0 +1,1 @@
+[{"id":1,"validation_field_id":1,"rule":"unique:users","created_at":"2021-08-27 10:01:42","updated_at":"2021-08-27 10:01:42","validation_field_name":"Phone","model_name":"user_altrp"}]

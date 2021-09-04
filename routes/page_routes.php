@@ -1,0 +1,2 @@
+<?php
+/*Routes for pages*/

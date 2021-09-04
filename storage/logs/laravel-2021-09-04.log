@@ -1,0 +1,11 @@
+[2021-09-04 05:55:56] production.ERROR: 04.09.2021 05:55:56 | User Id: 2 | User Ip: 2.92.137.45 | Method:App\Http\Controllers\Admin\UpdateController::check_update  
+[2021-09-04 06:01:38] production.INFO: getStoragePath result: /var/www/sher.gtfb.tech/storage/app/public/docs/2.92.137.45/new.docx  
+[2021-09-04 06:01:38] production.INFO: getStoragePath result: /var/www/sher.gtfb.tech/storage/app/public/docs/2.92.137.45/new.docx  
+[2021-09-04 06:01:38] production.INFO: getStoragePath result: /var/www/sher.gtfb.tech/storage/app/public/docs/2.92.137.45/new.docx  
+[2021-09-04 06:01:38] production.INFO: getVirtualPath virtPath: https://gbu.regagro.net/storage/docs/2.92.137.45/  
+[2021-09-04 06:01:38] production.INFO: getVirtualPath virtPath: https://sher.gtfb.tech/storage/docs/2.92.137.45/  
+[2021-09-04 06:01:38] production.INFO: getVirtualPath virtPath: https://sher.gtfb.tech/storage/docs/2.92.137.45/  
+[2021-09-04 06:01:38] production.INFO: getStoragePath result: /var/www/sher.gtfb.tech/storage/app/public/docs/2.92.137.45/new.docx  
+[2021-09-04 06:01:38] production.INFO: getStoragePath result: /var/www/sher.gtfb.tech/storage/app/public/docs/2.92.137.45/new.docx  
+[2021-09-04 06:01:38] production.INFO: getStoragePath result: /var/www/sher.gtfb.tech/storage/app/public/docs/2.92.137.45/new.docx  
+[2021-09-04 06:01:38] production.INFO: getStoragePath result: /var/www/sher.gtfb.tech/storage/app/public/docs/2.92.137.45/  

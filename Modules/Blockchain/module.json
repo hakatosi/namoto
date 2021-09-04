@@ -1,0 +1,13 @@
+{
+    "name": "Blockchain",
+    "alias": "blockchain",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Blockchain\\Providers\\BlockchainServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
