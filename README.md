@@ -29,7 +29,7 @@
 Супербезопасный и экономичный блокчейн, токенизация премий и штрафов, все-в-одном, генератор документов, интерактивный "светофор".
 
 
-4. [Демо-сайт решения](https://sher.gtfb.tech/)
+4. [Демо-сайт решения](https://sheremet.gtfb.tech/)
  5. [Как мы работали на хакатоне](https://www.youtube.com/watch?v=SVPnLOfucjU)
  6. [Github](https://github.com/hakatosi/namoto)
  7. [Видеоролик с решением кейса (MVP)](https://www.youtube.com/watch?v=mKDul6X056w)
