@@ -43,7 +43,7 @@ class tenant extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['name','user_id','tenant_type_id','tenant_kind_id'];
 
     /**
      * Relations that should be always with.

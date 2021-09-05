@@ -43,7 +43,7 @@ class document extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['stat_date','end_date','name','code','signature','room_id'];
 
     /**
      * Relations that should be always with.

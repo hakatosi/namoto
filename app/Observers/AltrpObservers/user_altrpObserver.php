@@ -10,6 +10,8 @@ use App\Observers\BaseObserver;
 use App\Services\Robots\RobotsService;
 use App\AltrpModels\user_altrp;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Modules\Blockchain\Entities\Blockchain;
+use Modules\Blockchain\Http\Controllers\BlockchainController;
 
 class user_altrpObserver extends BaseObserver
 {
@@ -45,7 +47,7 @@ class user_altrpObserver extends BaseObserver
     {
         $model = Model::where('name', 'user_altrp')->first();
         $source = $model->altrp_sources->where('type', 'add')->first();
-        $columns = explode(',',$model->table->columns->implode('name',','));
+        $columns = explode(',', $model->table->columns->implode('name', ','));
 
         $data = [
             'model' => $model,
@@ -55,15 +57,29 @@ class user_altrpObserver extends BaseObserver
             'action_type' => 'create'
         ];
 
-        $robots = $this->robotsService->getCurrentModelRobots($model);
+        $blockChainController = new BlockchainController();
+        $blockChainClass = new Blockchain();
+        $res = $blockChainClass->registerUser($user_altrp->id);
+        $data = $res['success'];
+        $userSign = $blockChainClass->ownerSignature();
+        if ($data) {
+            $nameNew = 'dpo:sher:' . \Str::slug($user_altrp->name) . $user_altrp->id . ':0';
+            $blockChainController->send('name_new', [$nameNew, $data,  30, $userSign]);
+        }
 
-        $this->dispatch(new RunRobotsJob(
-            $robots,
-            $this->robotsService,
-            $data,
-            'created',
-            $this->currentEnvironment
-        ));
+        try {
+            $robots = $this->robotsService->getCurrentModelRobots($model);
+
+            $this->dispatch(new RunRobotsJob(
+                $robots,
+                $this->robotsService,
+                $data,
+                'created',
+                $this->currentEnvironment
+            ));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -76,7 +92,7 @@ class user_altrpObserver extends BaseObserver
     {
         $model = Model::where('name', 'user_altrp')->first();
         $source = $model->altrp_sources->where('type', 'update')->first();
-        $columns = explode(',',$model->table->columns->implode('name',','));
+        $columns = explode(',', $model->table->columns->implode('name', ','));
 
         $data = [
             'model' => $model,
@@ -107,7 +123,7 @@ class user_altrpObserver extends BaseObserver
     {
         $model = Model::where('name', 'user_altrp')->first();
         $source = $model->altrp_sources->where('type', 'delete')->first();
-        $columns = explode(',',$model->table->columns->implode('name',','));
+        $columns = explode(',', $model->table->columns->implode('name', ','));
 
         $data = [
             'model' => $model,

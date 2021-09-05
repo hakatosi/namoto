@@ -10,6 +10,8 @@ use App\Observers\BaseObserver;
 use App\Services\Robots\RobotsService;
 use App\AltrpModels\document;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Modules\Blockchain\Entities\Blockchain;
+use Modules\Blockchain\Http\Controllers\BlockchainController;
 
 class documentObserver extends BaseObserver
 {
@@ -55,6 +57,32 @@ class documentObserver extends BaseObserver
             'action_type' => 'create'
         ];
 
+      if (!$document->signature) {
+        $blockChainController = new BlockchainController();
+        $blockChainClass = new Blockchain();
+        $res = $blockChainClass->registerDocument($document->id, true);
+        $data = $res['success'];
+        if ($data) {
+          $ownerSign = $blockChainClass->ownerSignature();
+          $address = $blockChainController->send('getnewaddress')->result;
+          if ($address) {
+            $document->signature = $address;
+            $document->save();
+            $signOwner = $blockChainController->send('signmessage', [$ownerSign, $data])->result;
+            if ($signOwner) {
+              $userSign = $blockChainClass->userSignature();
+              $signUser = $blockChainController->send('signmessage', [$userSign, $data])->result;
+
+              //$newres = $blockChainClass->registerRoom($room->id, true)['success'];
+              $nameNew = $blockChainClass->registerDocument($document->id)['success'];
+              $data = str_replace('|', "\n", $data) . "\n" . 'Signature=' . $signOwner . "\n" . 'TenantSig=' . $signUser;
+              $blockChainController->send('name_new', [$nameNew, $data, 30, $address]);
+              // dd($newData);
+            }
+          }
+        }
+      }
+      try {
         $robots = $this->robotsService->getCurrentModelRobots($model);
 
         $this->dispatch(new RunRobotsJob(
@@ -64,6 +92,9 @@ class documentObserver extends BaseObserver
             'created',
             $this->currentEnvironment
         ));
+      } catch (\Throwable $th) {
+        //throw $th;
+      }
     }
 
     /**

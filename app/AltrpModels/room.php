@@ -21,8 +21,21 @@ class room extends Model
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
+    /**
+     * The name of the "created at" column.
+     *
+     * @var string
+     */
+    const CREATED_AT = 'created_at';
+
+    /**
+     * The name of the "created at" column.
+     *
+     * @var string
+     */
+    const UPDATED_AT = 'updated_at';
 
     /**
     * The database table used by the model.
@@ -43,7 +56,7 @@ class room extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['name','type_id','square','amount','signature'];
 
     /**
      * Relations that should be always with.
@@ -61,6 +74,11 @@ class room extends Model
     // ACCESSORS - IMPORTANT: Don't remove this comment!
 
     // RELATIONSHIPS
+    public function room_type()
+    {
+        return $this->belongsTo('App\AltrpModels\room_type', 'type_id', 'id');
+    }
+
     
     // RELATIONSHIPS
 

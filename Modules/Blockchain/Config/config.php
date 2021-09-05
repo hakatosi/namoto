@@ -7,4 +7,5 @@ return [
     'emercoinUrl' => 'http://83.220.168.124:6662/',
     'emercoinUser' => 'emcrpc',
     'emercoinPass' => 'emcpass',
+    'period' => 30,
 ];

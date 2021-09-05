@@ -41,3 +41,12 @@ Route::put('/documents/{document}', ['uses' =>'AltrpControllers\documentControll
 Route::delete('/documents/{document}', ['uses' =>'AltrpControllers\documentController@destroy']);
 Route::put('/documents/{document}/{column}', ['uses' =>'AltrpControllers\documentController@updateColumn']);
 Route::get('/filters/documents/{column}', ['uses' =>'AltrpControllers\documentController@getIndexedColumnsValueWithCount']);
+// Routes for the room_types resource
+Route::get('/room_types', ['uses' =>'AltrpControllers\room_typeController@index']);
+Route::get('/room_type_options', ['uses' =>'AltrpControllers\room_typeController@options']);
+Route::post('/room_types', ['uses' =>'AltrpControllers\room_typeController@store']);
+Route::get('/room_types/{room_type}', ['uses' =>'AltrpControllers\room_typeController@show']);
+Route::put('/room_types/{room_type}', ['uses' =>'AltrpControllers\room_typeController@update']);
+Route::delete('/room_types/{room_type}', ['uses' =>'AltrpControllers\room_typeController@destroy']);
+Route::put('/room_types/{room_type}/{column}', ['uses' =>'AltrpControllers\room_typeController@updateColumn']);
+Route::get('/filters/room_types/{column}', ['uses' =>'AltrpControllers\room_typeController@getIndexedColumnsValueWithCount']);

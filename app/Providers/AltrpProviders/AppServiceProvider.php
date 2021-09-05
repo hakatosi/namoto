@@ -32,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
 
         \App\AltrpModels\document::observe(\App\Observers\AltrpObservers\documentObserver::class);
 
+        \App\AltrpModels\room_type::observe(\App\Observers\AltrpObservers\room_typeObserver::class);
+
 
     }
 }

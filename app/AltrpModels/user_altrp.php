@@ -2,7 +2,7 @@
 
 namespace App\AltrpModels;
 
-use Illuminate\Database\Eloquent\Model as Model;
+use App\User as UserModel;
 use App\Altrp\Generators\Traits\UserColumnsTrait;
 use App\Traits\RelationshipsTrait;
 
@@ -10,40 +10,23 @@ use App\Traits\RelationshipsTrait;
 
 // CUSTOM_NAMESPACES_END - IMPORTANT: Don't remove this comment! Write your namespaces between these comments.
 
-class user_altrp extends Model
+class user_altrp extends UserModel
 {
     // CUSTOM_TRAITS_BEGIN - IMPORTANT: Don't remove this comment! Write your traits between these comments.
     
     // CUSTOM_TRAITS_END - IMPORTANT: Don't remove this comment! Write your traits between these comments.
     use UserColumnsTrait, RelationshipsTrait;
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
+    
+    
 
-
-    /**
-    * The database table used by the model.
-    *
-    * @var string
-    */
-    protected $table = 'user_altrps';
-
-    /**
-    * The database primary key value.
-    *
-    * @var string
-    */
-    protected $primaryKey = 'id';
+    
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['signature'];
+    protected $fillable = ['signature','inn','kpp','name','email','password','last_name','notice_data','telegram_user_id'];
 
     /**
      * Relations that should be always with.

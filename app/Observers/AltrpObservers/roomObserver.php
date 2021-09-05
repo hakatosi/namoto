@@ -9,7 +9,9 @@ use App\Jobs\RunRobotsJob;
 use App\Observers\BaseObserver;
 use App\Services\Robots\RobotsService;
 use App\AltrpModels\room;
+use Modules\Blockchain\Entities\Blockchain;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Modules\Blockchain\Http\Controllers\BlockchainController;
 
 class roomObserver extends BaseObserver
 {
@@ -45,7 +47,7 @@ class roomObserver extends BaseObserver
     {
         $model = Model::where('name', 'room')->first();
         $source = $model->altrp_sources->where('type', 'add')->first();
-        $columns = explode(',',$model->table->columns->implode('name',','));
+        $columns = explode(',', $model->table->columns->implode('name', ','));
 
         $data = [
             'model' => $model,
@@ -55,15 +57,38 @@ class roomObserver extends BaseObserver
             'action_type' => 'create'
         ];
 
-        $robots = $this->robotsService->getCurrentModelRobots($model);
+        if (!$room->signature) {
+            $blockChainController = new BlockchainController();
+            $blockChainClass = new Blockchain();
+            $res = $blockChainClass->registerRoom($room->id);
+            $data = $res['success'];
+            if ($data) {
+                $userSign = $blockChainClass->ownerSignature();
+                $sign = $blockChainController->send('signmessage', [$userSign, $data])->result;
+                if ($sign) {
+                    $room->signature = $sign;
+                    $room->save();
+                    $newres = $blockChainClass->registerRoom($room->id, true)['success'];
+                    $nameNew = 'dpo:sher:' . \Str::slug($room->name) . ':0';
+                    $blockChainController->send('name_new', [$nameNew, $newres,  30, $userSign]);
+                    // dd($newData);
+                }
+            }
+        }
 
-        $this->dispatch(new RunRobotsJob(
-            $robots,
-            $this->robotsService,
-            $data,
-            'created',
-            $this->currentEnvironment
-        ));
+        try {
+            $robots = $this->robotsService->getCurrentModelRobots($model);
+
+            $this->dispatch(new RunRobotsJob(
+                $robots,
+                $this->robotsService,
+                $data,
+                'created',
+                $this->currentEnvironment
+            ));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -76,7 +101,7 @@ class roomObserver extends BaseObserver
     {
         $model = Model::where('name', 'room')->first();
         $source = $model->altrp_sources->where('type', 'update')->first();
-        $columns = explode(',',$model->table->columns->implode('name',','));
+        $columns = explode(',', $model->table->columns->implode('name', ','));
 
         $data = [
             'model' => $model,
@@ -107,7 +132,7 @@ class roomObserver extends BaseObserver
     {
         $model = Model::where('name', 'room')->first();
         $source = $model->altrp_sources->where('type', 'delete')->first();
-        $columns = explode(',',$model->table->columns->implode('name',','));
+        $columns = explode(',', $model->table->columns->implode('name', ','));
 
         $data = [
             'model' => $model,

@@ -1,0 +1,16 @@
+[2021-09-05 03:59:41] production.DEBUG: URL:https://sher.gtfb.tech/https://www.youtube.com/watch  
+[2021-09-05 03:59:48] production.DEBUG: URL:https://sher.gtfb.tech/https://drive.google.com/file/d/1u06w9YnTqmP051VbmYtgYTbUq74CvJoZ/view  
+[2021-09-05 05:31:58] production.ERROR: file_get_contents(https://samara.medin.cloud/storage/media/2021/07/dKqPm5qOYaWlx3ft5N2MDvleutXDpM5S0eDpn8e4.svg): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+  
+[2021-09-05 05:31:59] production.ERROR: file_get_contents(https://samara.medin.cloud/storage/media/2021/07/dKqPm5qOYaWlx3ft5N2MDvleutXDpM5S0eDpn8e4.svg): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+  
+[2021-09-05 05:31:59] production.ERROR: file_get_contents(https://samara.medin.cloud/storage/media/2021/07/dKqPm5qOYaWlx3ft5N2MDvleutXDpM5S0eDpn8e4.svg): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+  
+[2021-09-05 05:32:00] production.ERROR: file_get_contents(https://samara.medin.cloud/storage/media/2021/07/dKqPm5qOYaWlx3ft5N2MDvleutXDpM5S0eDpn8e4.svg): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+  
+[2021-09-05 05:32:00] production.ERROR: file_get_contents(https://samara.medin.cloud/storage/media/2021/07/dKqPm5qOYaWlx3ft5N2MDvleutXDpM5S0eDpn8e4.svg): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+  
+[2021-09-05 05:32:01] production.ERROR: file_get_contents(https://samara.medin.cloud/storage/media/2021/07/dKqPm5qOYaWlx3ft5N2MDvleutXDpM5S0eDpn8e4.svg): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+  
+[2021-09-05 05:32:02] production.ERROR: file_get_contents(https://samara.medin.cloud/storage/media/2021/07/dKqPm5qOYaWlx3ft5N2MDvleutXDpM5S0eDpn8e4.svg): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+  
